@@ -1,0 +1,62 @@
+{{> _iNavbar}}
+{{> _flashmsg}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="stylesheet" href="/css/healthcare.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+     $(document).ready(function() {
+        $("#immunisation_date").change(function() {
+            var selectedDate = new Date($(this).val());
+            var currentDate = new Date();
+            currentDate.setTime(currentDate.getTime() - 86400000);
+            if (selectedDate < currentDate) {
+                alert("Invalid date! Please select a date after or equal to today's date.");
+                $(this).val("");
+            }
+        });
+    });
+    
+</script>
+    </head>
+    <body>
+   <h1 class="title">IMMUNISATIONS</h1>
+
+
+    <div class="rectangle-34624619">
+        <div class="immunisation-records">Edit Immunisation Records </div>
+       
+        <hr class="test4"></hr>
+        <form action="/healthcarerecord/immunEdit/{{individual.id}}?_method=PUT" method="post">
+            <div class="test5">
+           <div class="form-group">
+            <label class="labeltxt" for="immunisation_date">Date:</label>
+            <input type="date" class="form-control" id="immunisation_date" name="immunisation_date" value="{{individual.immunisation_date}}" required>
+            </div>
+            
+        <div class="form-group">
+            <label class="labeltxt" for="vac_type">Vaccination Type:</label>
+            <textarea class="form-control" id="vac_type" name="vac_type">{{individual.vac_type}}</textarea>
+        </div>
+        <div class="form-group">
+            <label class="labeltxt" for="vac_location">Vaccinated location:</label>
+            <select  class="form-control" id="vac_location" name="vac_location">
+                <option value="{{individual.vac_location}}">{{individual.vac_location}}</option>
+                <option value="Sengkang Hospital">Sengkang Hospital</option>
+                <option value="Healthserve">Healthserve Community Clinic</option>
+                <option value="St Andrew">St Andrews Migrant Worker Clinic</option>
+                <option value="khooteckpuat">Khoo Teck Puat Hospital</option>
+            </select>
+        </div>
+                <br>
+                <br>
+            <input class="positions" type="submit" value="Update">
+            </div>
+        </form>
+
+        
+    </body>
+</html>

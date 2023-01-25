@@ -1,0 +1,353 @@
+{{> _lNavbar}}
+{{> _flashmsg}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="stylesheet" href="/css/healthcare.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- jQuery CSS -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script>
+
+$(document).ready(function(){
+    $('.group2').hide(); 
+     $('.search-option').find('hr').show();
+    $('.search-option').on('click', function(){
+        $(this).addClass('active');
+        $('.view-option').removeClass('active');
+        
+         $('.overlap-group1-group-33618').show();
+         $('.group2').hide();
+        
+        $(this).find('hr').show();
+        $('.view-option').find('hr').hide();
+    });
+    $('.view-option').on('click', function(){
+        $(this).addClass('active');
+        $('.search-option').removeClass('active');
+        $('.group2').show();
+         $('.overlap-group1-group-33618').hide();
+        $(this).find('hr').show();
+        $('.search-option').find('hr').hide();
+    });
+});
+    
+    var datePicker = document.getElementById("datePicker");
+    $(document).ready(function(){
+        
+    $("#datePicker").datepicker({
+        onSelect: function(date) {
+            showTimeSlot("instituteName", date);
+        }
+    });
+});
+
+function showTimeSlots(instituteName, date) {
+    var $timeSlotsDiv = $("#timeSlots");
+    $timeSlotsDiv.empty();
+    for (var i = 0; i < availableTimeSlots.length; i++) {
+        var timeSlot = availableTimeSlots[i];
+        var $timeSlotDiv = $("<div>").html(timeSlot);
+        $timeSlotDiv.on("click", function() {
+            saveBooking(instituteName, date, timeSlot);
+        });
+        $timeSlotsDiv.append($timeSlotDiv);
+    }
+}
+  
+   
+    function showDatePicker(instituteName) {
+            var datePicker = document.getElementById("datePicker");
+            
+            var startOfWeek = now.clone().startOf('week');
+            var endOfWeek = now.clone().endOf('week');
+            $("#datePicker").datepicker({
+                minDate: startOfWeek.toDate(),
+                maxDate: endOfWeek.toDate(),
+                onSelect: function(date) {
+                    showTimeSlots(instituteName, date);
+                }
+            });
+        }
+    
+
+    $( "#date_picker1" ).datepicker({
+dateFormat: 'dd-mm-yy'
+})
+///////
+$('#date_picker1').change(function() {
+//startDate = $(this).datepicker('getDate');
+startDate = $('#date_picker1').val();
+$('#date_selected').text(startDate);
+})
+
+    </script>
+  
+
+   
+
+    <style>
+      .img1{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 850px;
+    top: 100px;
+    bottom: 34.5px;
+    margin-top: -80px;
+
+    
+}
+
+th,
+        td {
+            border-bottom: 1px solid #dddddd;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        table{
+            background-color: white;
+            border-collapse: collapse;
+            width: 1028px;
+        }
+.card {
+    
+    box-shadow: 2px 2px 5px #ccc;
+    height:fit-content;
+    
+    
+    
+
+    align-items: flex-start;
+    background-color: var(--yellow);
+    border-radius: 15px;
+    box-shadow: 0px 4px 22px #00000040;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-top: 32px;
+    min-height: 200px;
+    padding: 29px 69px;
+    width: 900px;
+}
+
+.card-body {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-left: -50px;
+    margin-top: -40px;
+    text-align: left;
+    margin-bottom: 10px;
+   
+}
+
+.title3{
+    font-weight: bold;
+    
+    
+}
+
+
+          
+        .input-icons {
+             position: relative;
+             z-index: 100;
+             top: 13px;
+
+        }
+          
+        .icon {
+            margin-top: -40px;
+            color: black;
+            min-width: 50px;
+            text-align: center;
+        }
+          
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            text-align: left;}
+
+         
+            #funkystyling {
+    
+    padding-left: 37px;
+    
+}
+.active hr {
+    visibility: visible;
+    height: 3px;
+        background: black;
+}
+
+    </style>
+
+    
+</head>
+<body>
+<div class="group-33618">
+    <div class="healthcare-records-container">
+        <div class="migrants-healthcare-records">MIGRANTS HEALTHCARE RECORDS</div>
+
+        <div class="group-33626">
+            <div class="flex-col-1">
+                <div class=" inter-medium-black-20px search-option">SEARCH <hr/></div>
+            </div>
+                <div class="view-bookings inter-medium-black-20px view-option">VIEW BOOKINGS <hr/></div>
+
+            
+        </div>
+
+    </div>
+
+    <div class="overlap-group1-group-33618">
+        <div class="search-for-migrant">Search Healthcare Locations </div>
+        <div class="overlap-group-overlap-group1">
+            <form method="post" class="nosubmit" action="/healthcarerecord/migrantbooking">
+            <div>
+                <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" class="input-icons" height="20px" width="20px">
+                <input type="text" id="funkystyling" class="search-migrant-name-or-id rectangle-34624641 input-field" name="searchName"  placeholder="Search by Healthcare location and services"  >
+                    </div>
+                    <p class="test test3">{{count}} Results Found</p>
+                    <div class="test">
+                    <input type="submit" class="accept search valign-text-middle " value="Search">
+                    </div>
+                    
+                    
+            </form>
+           
+
+    <div class="group">
+    <table style="border-collapse: collapse; width:940px">
+    <thead>
+        <tr>
+            <th style="border-bottom: 1px solid black;">Name</th>
+        </tr>
+    </thead>
+    <tbody>
+       {{#each entity }}
+        <tr style="border-bottom: 1px solid black;">
+            <td>
+               <p><a  id="datePicke" onclick="showDatePicker('{{this.name}}')" data-toggle="modal" data-target="#exampleModalCenter">{{this.name}}</a>
+               </p>
+            </td>
+
+         <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Book Now</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form method="post" action="/healthcarerecord/book-now">
+                    <div class="modal-body">
+                      <lable>Healthcare Institute</lable>
+                        <input type="text" class="form-control" name="book_institute" placeholder="{{this.name}}" value="{{this.name}}" ><br>
+                      <lable>Date</lable>
+                        <input type="date" id="dateId" min="{{../maxDate}}" max='{{../minDate}}' class="form-control" name="book_date" ><br>
+                    
+                      <lable>Time Slot</lable>
+                         <select class="form-control" id="SubcategoryId"
+                            name="book_slottime">
+                         </select>
+
+                     </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+
+                 </form>
+                </div>
+              </div>
+            </div>   
+            
+         </tr>
+       {{/each}}   
+    </tbody>
+</table>
+</div>
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="group2">
+    <table style="border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th style="border-bottom: 1px solid black;">Date</th>
+            <th style="border-bottom: 1px solid black;">Healthcare Institute</th>
+            <th style="border-bottom: 1px solid black;">Slot Timing</th>
+            <th style="border-bottom: 1px solid black;">Confirmation</th>
+        </tr>
+    </thead>
+    <tbody>
+       {{#each healthcareBook}}
+        <tr style="border-bottom: 1px solid black;">
+            <td>{{book_date}}</td>
+            <td>{{book_institute}}</td>
+            <td>{{book_slottime}}</td>
+            <td>{{confirmation}}</td>
+        </tr>
+       {{/each}}   
+    </tbody>
+</table>
+</div>
+
+
+
+
+        </div>
+
+
+<script>
+  $('#dateId').change(function () {
+            $('.loading').css('display', 'block');
+            let pId = this.value;
+            console.log(pId)
+            $.ajax({
+                type: "GET",
+                url: `/healthcarerecord/get/date/${pId}`,
+                async: true,
+                success: function (response) {
+                    $('.loading').css('display', 'none');
+                    if (response) {
+                        updateHtml(response)
+                    }
+                },
+                error: function () {
+                    $('.loading').css('display', 'none');
+                }
+            });
+        });
+        function updateHtml(response) {
+            let updateHtml = ``;
+            response.forEach(sub => {
+            console.log(sub)
+                updateHtml += `<option value='${sub}'>${sub}</option>`;
+            });
+            $('#SubcategoryId').html(updateHtml)
+
+        }
+</script>
+
+
+        </body>
+        </html>

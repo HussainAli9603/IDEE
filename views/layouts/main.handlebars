@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>IDEE</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/css/animate.css">
+
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="/css/aos.css">
+
+    <link rel="stylesheet" href="/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="/css/flaticon.css">
+    <link rel="stylesheet" href="/css/icomoon.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    {{!--Font Awesome icons --}}
+    <script src="https://kit.fontawesome.com/c9e8a9a0c4.js" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+        integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+
+    <!-- Blockchain web3 libary -->
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
+    {{!-- Connect to metamask onload --}}
+    <script>
+        async function connect() {
+            if (window.ethereum !== "undefined") {
+                 await ethereum.enable();
+                const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+                let walletAddress = accounts[0];
+                document.getElementById("registerHi").action = `/registerHi/${walletAddress}`;
+                document.getElementById("registerBusiness").action = `/registerBusiness/${walletAddress}`;
+                document.getElementById("registerMigrant").action = `/registerLM/${walletAddress}`;
+                console.log(`Wallet: ${walletAddress}`);
+                console.log("Metamask connected!");
+            }
+            else {
+                alert("MetaMask is not installed");
+            }
+            $("#loader").hide();
+        }
+    </script>
+
+    {{!-- Script for face verification --}}
+    <script type="text/javascript" src="https://unpkg.com/@passbase/button"></script>
+
+    {{!-- Login click --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script>
+        async function login() {
+            const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+            let walletAddress = accounts[0];
+            // encrypt wallet address and parse it into url
+            const encoded = CryptoJS.enc.Utf8.parse(walletAddress);
+            const encryptedAddress = CryptoJS.enc.Base64.stringify(encoded);
+            location.href = `login/${encryptedAddress}`;
+        };
+    </script>
+</head>
+
+<body onload="connect()">
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title font-weight-bold" id="exampleModalLongTitle">Hello! Who are you <br>
+                        registering as?</h2>
+                    <a href="#" data-dismiss="modal"><i class="fa-solid fa-xmark fa-lg" style="color: black;"></i></a>
+                </div>
+                <div class="modal-body">
+                    <button class="modalButton" data-dismiss="modal" data-toggle="modal"
+                        data-target="#HiRegistrationModal">Healthcare Institution</button>
+                    <button class="modalButton" data-dismiss="modal" data-toggle="modal"
+                        data-target="#BRegistrationModal">Business</button>
+                    <button class="modalButton" data-dismiss="modal" data-toggle="modal"
+                        data-target="#MRegistrationModal">Local/Migrant</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Healthcare Institution Registration Form Modal -->
+    <div class="modal fade" id="HiRegistrationModal" tabindex="-1" role="dialog" aria-labelledby="registerModal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title font-weight-bold" id="exampleModalLongTitle">Registration Form</h2>
+                    <a href="#" data-dismiss="modal"><i class="fa-solid fa-xmark fa-lg" style="color: black;"></i></a>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST" id="registerHi">
+                        <div class="uploadProfile col-8" style="padding-right: 10px;">
+                            <img src="img/noProfile.png" width=100 height=100 alt="no img" id="HiProfile"
+                                style="border-radius: 50%;">
+                            <div class="round text-center">
+                                <input type="file" id="HiUpload" name="HiUpload"
+                                    accept="image/png, image/jpeg, image/jpg">
+                                <i class="fa fa-camera" style="color: black;"></i>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <input type="text" id="HiURL" name="HiURL"
+                                style="border: none; caret-color: transparent; cursor: default; height: 1px; color: white; outline: none; text-align: center;"
+                                required oninvalid="HiImage(this);" oninput="HiImage(this);">
+                            <div class="font-weight-bold text-danger small" id="HiErr" style="display: none;"></div>
+                        </div>
+                        <div class="inputGroup mt-4">
+                            <label for="HiName" class="modalLabel">Enter name of healthcare institution: </label>
+                            <input type="text" name="HiName" id="HiName" class="modalInput" required
+                                oninvalid="Name(this);" oninput="Name(this);">
+                        </div>
+                        <div class="inputGroup mt-4">
+                            <label for="HiWebsite" class="modalLabel">Enter official website address: </label>
+                            <input type="text" name="HiWebsite" id="HiWebsite" class="modalInput"
+                                placeholder="e.g http://www.healthcare.com.sg" required oninvalid="Website(this);"
+                                oninput="Website(this);">
+                        </div>
+                        <button class="modalButton mt-4" type="submit">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Business Registration Form Modal -->
+    <div class="modal fade" id="BRegistrationModal" tabindex="-1" role="dialog" aria-labelledby="registerModal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title font-weight-bold" id="exampleModalLongTitle">Registration Form</h2>
+                    <a href="#" data-dismiss="modal"><i class="fa-solid fa-xmark fa-lg" style="color: black;"></i></a>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="POST" id="registerBusiness">
+                        <div class="uploadProfile col-8" style="padding-right: 10px;">
+                            <img src="img/noProfile.png" width=100 height=100 alt="no img" id="bProfile"
+                                style="border-radius: 50%;">
+                            <div class="round text-center">
+                                <input type="file" id="bUpload" name="bUpload"
+                                    accept="image/png, image/jpeg, image/jpg">
+                                <i class="fa fa-camera" style="color: black;"></i>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <input type="text" id="bURL" name="bURL"
+                                style="border: none; caret-color: transparent; cursor: default; height: 1px; color: white; outline: none; text-align: center;"
+                                required oninvalid="HiImage(this);" oninput="HiImage(this);">
+                            <div class="font-weight-bold text-danger small" id="bErr" style="display: none;"></div>
+                        </div>
+                        <div class="inputGroup mt-4">
+                            <label for="bName" class="modalLabel">Enter name of business: </label>
+                            <input type="text" name="bName" id="bName" class="modalInput" required
+                                oninvalid="Name(this);" oninput="Name(this);">
+                        </div>
+                        <div class="inputGroup mt-4">
+                            <label for="bWebsite" class="modalLabel">Enter official website address: </label>
+                            <input type="text" name="bWebsite" id="bWebsite" class="modalInput"
+                                placeholder="e.g http://www.business.com.sg" required oninvalid="Website(this);"
+                                oninput="Website(this);">
+                        </div>
+                        <button class="modalButton mt-4" type="submit">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Local/Migrant Registration Form Modal -->
+    <div class="modal fade" id="MRegistrationModal" tabindex="-1" role="dialog" aria-labelledby="registerModal"
+        aria-hidden="true" style="overflow-y: scroll;">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title font-weight-bold" id="exampleModalLongTitle">Registration Form</h2>
+                    <a href="#" data-dismiss="modal"><i class="fa-solid fa-xmark fa-lg" style="color: black;"></i></a>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="POST" id="registerMigrant">
+                        <div class="uploadProfile col-8" style="padding-right: 10px;">
+                            <img src="img/noProfile.png" width=100 height=100 alt="no img" id="mProfile"
+                                style="border-radius: 50%;">
+                            <div class="round text-center">
+                                <input type="file" id="mUpload" name="mUpload"
+                                    accept="image/png, image/jpeg, image/jpg">
+                                <i class="fa fa-camera" style="color: black;"></i>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <input type="text" id="mURL" name="mURL"
+                                style="border: none; caret-color: transparent; cursor: default; height: 1px; color: white; outline: none; text-align: center;"
+                                required oninvalid="HiImage(this);" oninput="HiImage(this);">
+                            <div class="font-weight-bold text-danger small" id="mErr" style="display: none;"></div>
+                        </div>
+                        <h5 class="font-weight-bold">Step 1: Verify</h5>
+                        <div id="passbase-button"></div> {{!-- verify button for face verification --}}
+                        <img id="loader" src="img/loader.gif">
+                        <h5 class="font-weight-bold mt-4">Step 2: Check &amp; fill up remaining details</h5>
+                        <div class="inputGroup mt-2">
+                            <label for="mName" class="modalLabel">Name: </label>
+                            <input type="text" name="mName" id="mName" class="modalInput" required>
+                        </div>
+                        <div class="inputGroup mt-2">
+                            <label for="mNationality" class="modalLabel">Nationality: </label>
+                            <input type="text" name="mNationality" id="mNationality" class="modalInput" required>
+                        </div>
+                        <div class="inputGroup mt-2">
+                            <label for="mGender" class="modalLabel">Gender: </label>
+                            <input type="text" name="mGender" id="mGender" class="modalInput" required>
+                        </div>
+                        <div class="inputGroup mt-2">
+                            <label for="mID" class="modalLabel">Identification Number: </label>
+                            <input type="text" name="mID" id="mID" class="modalInput" required>
+                        </div>
+                        <div class="inputGroup mt-2">
+                            <label for="mDOB" class="modalLabel">Date Of Birth: </label>
+                            <input type="text" name="mDOB" id="mDOB" class="modalInput" required>
+                        </div>
+                        <div class="inputGroup mt-2">
+                            <label for="mAddress" class="modalLabel">Address: </label>
+                            <input type="text" name="mAddress" id="mAddress" class="modalInput" required
+                                oninvalid="Name(this);" oninput="Name(this);">
+                        </div>
+                        <div class="inputGroup mt-2">
+                            <label for="mContact" class="modalLabel">Contact Number: </label>
+                            <input type="number" name="mContact" id="mContact" class="modalInput" required
+                                oninvalid="Contact(this);" oninput="Contact(this);">
+                        </div>
+                        <div class="inputGroup mt-2">
+                            <label for="mEmail" class="modalLabel">Email Address: </label>
+                            <input type="email" name="mEmail" id="mEmail" class="modalInput" required
+                                oninvalid="Email(this);" oninput="Email(this);">
+                        </div>
+                        <button class="modalButton mt-4" type="submit" id="registerButton">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{{body}}}
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00" />
+        </svg></div>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.easing.1.3.js"></script>
+    <script src="/js/jquery.waypoints.min.js"></script>
+    <script src="/js/jquery.stellar.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/jquery.magnific-popup.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/jquery.animateNumber.min.js"></script>
+    <script src="/js/bootstrap-datepicker.js"></script>
+    <script src="/js/jquery.timepicker.min.js"></script>
+    <script src="/js/scrollax.min.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="/js/google-map.js"></script>
+    <script src="/js/main.js"></script>
+
+    {{!-- Healthcare Institution image upload --}}
+    <script>
+        $('#HiUpload').on('change', function () {
+            let image = $("#HiUpload")[0].files[0];
+            let formdata = new FormData();
+            formdata.append('HiUpload', image);
+            $.ajax({
+                url: '/HiUpload',
+                type: 'POST',
+                data: formdata,
+                contentType: false,
+                processData: false,
+                'success': (data) => {
+                    $('#HiProfile').attr('src', data.file);
+                    $('#HiURL').attr('value', data.file); // sets HiURL hidden field
+                    if (data.err) {
+                        console.log("healthcare institution image uploaded");
+                        $('#HiErr').show();
+                        $('#HiErr').text(data.err.message);
+                    } else {
+                        $('#HiErr').hide();
+                    }
+                }
+            });
+        });
+    </script>
+
+    {{!-- Business image upload --}}
+    <script>
+        $('#bUpload').on('change', function () {
+            let image = $("#bUpload")[0].files[0];
+            let formdata = new FormData();
+            formdata.append('bUpload', image);
+            $.ajax({
+                url: '/bUpload',
+                type: 'POST',
+                data: formdata,
+                contentType: false,
+                processData: false,
+                'success': (data) => {
+                    $('#bProfile').attr('src', data.file);
+                    $('#bURL').attr('value', data.file); // sets HiURL hidden field
+                    if (data.err) {
+                        console.log("business image uploaded");
+                        $('#bErr').show();
+                        $('#bErr').text(data.err.message);
+                    } else {
+                        $('#bErr').hide();
+                    }
+                }
+            });
+        });
+    </script>
+
+    {{!-- Migrant image upload --}}
+    <script>
+        $('#mUpload').on('change', function () {
+            let image = $("#mUpload")[0].files[0];
+            let formdata = new FormData();
+            formdata.append('mUpload', image);
+            $.ajax({
+                url: '/mUpload',
+                type: 'POST',
+                data: formdata,
+                contentType: false,
+                processData: false,
+                'success': (data) => {
+                    $('#mProfile').attr('src', data.file);
+                    $('#mURL').attr('value', data.file); // sets mURL hidden field
+                    if (data.err) {
+                        console.log("migrant image uploaded");
+                        $('#mErr').show();
+                        $('#mErr').text(data.err.message);
+                    } else {
+                        $('#mErr').hide();
+                    }
+                }
+            });
+        });
+    </script>
+
+    {{!-- Register healthcare institution upload --}}
+    <script>
+        $('#mUpload').on('change', function () {
+            let image = $("#mUpload")[0].files[0];
+            let formdata = new FormData();
+            formdata.append('mUpload', image);
+            $.ajax({
+                url: '/mUpload',
+                type: 'POST',
+                data: formdata,
+                contentType: false,
+                processData: false,
+                'success': (data) => {
+                    $('#mProfile').attr('src', data.file);
+                    $('#mURL').attr('value', data.file); // sets mURL hidden field
+                    if (data.err) {
+                        console.log("migrant image uploaded");
+                        $('#mErr').show();
+                        $('#mErr').text(data.err.message);
+                    } else {
+                        $('#mErr').hide();
+                    }
+                }
+            });
+        });
+    </script>
+
+    {{!-- Form validations --}}
+    <script>
+        function HiImage(field) {
+            if (field.value === '') {
+                field.setCustomValidity('Please select an image.');
+            } else if (field.validity.typeMismatch) {
+                field.setCustomValidity('Please select an image.');
+            } else {
+                field.setCustomValidity('');
+            }
+
+            return true;
+        }
+
+        function Contact(field) {
+            if (field.value === '') {
+                field.setCustomValidity('This is a required field.');
+            } else if (field.value.toString().length != 8) {
+                field.setCustomValidity('Please enter a valid contact number.');
+            } else {
+                field.setCustomValidity('');
+            }
+
+            return true;
+        }
+
+        function Email(field) {
+            if (field.value === '') {
+                field.setCustomValidity('This is a required field.');
+            } else if (field.validity.typeMismatch) {
+                field.setCustomValidity('Please enter a valid email address.');
+            } else {
+                field.setCustomValidity('');
+            }
+
+            return true;
+        }
+
+        function Name(field) {
+            if (field.value === '') {
+                field.setCustomValidity('This is a required field.');
+            } else {
+                field.setCustomValidity('');
+            }
+
+            return true;
+        }
+
+        var elm;
+        function isValidURL(u) {
+            //A precaution/solution for the problem written in the ***note***
+            if (u !== "") {
+                if (!elm) {
+                    elm = document.createElement('input');
+                    elm.setAttribute('type', 'url');
+                }
+                elm.value = u;
+                return elm.validity.valid;
+            }
+            else {
+                return false
+            }
+        }
+        function Website(field) {
+            if (field.value === '') {
+                field.setCustomValidity('This is a required field.');
+            } else if (isValidURL(field.value) == false) {
+                field.setCustomValidity('Please enter a valid website address.');
+            } else {
+                field.setCustomValidity('');
+            }
+
+            return true;
+        }
+    </script>
+
+    {{!-- Face verification --}}
+    <script type="text/javascript">
+        // Face verification API
+        Passbase.renderButton(
+            document.getElementById("passbase-button"),
+            "u17cewqpeSI6Ro04cDJ1D2VTEdNgMCaSTZltDTQVRsH4083J9ocMZXe6v7Y0ZcwW", // publishable api key
+            {
+                onStart: () => { },
+                onError: (errorCode) => { },
+                onFinish: (identityAccessKey) => {
+                    // input pop up, set visibility to visible
+                    setTimeout(function () {
+                        fetch(`https://api.passbase.com/verification/v1/identities/${identityAccessKey}`, {
+                            headers: {
+                                'X-API-KEY': 'vm9N5VFIjKRNYf3MVCQl8JzE17LSP1kuqXa5JyJbqD2DHxlLihn8CV9DUPT54BQfeugTd6tr7xYObuiIA9eXPwb6ggUsCvQPt8dtz2Otz0rjDWjFCcQXzfxnBrU5WUs5' // secret api key
+                            }
+                        }).then(res => res.json())
+                            .then(data => {
+                                console.log(data);
+                                $("#loader").hide();
+                                document.getElementById("accessKey").value = data.owner.first_name;
+
+                                document.getElementById("mAddress").disabled = false;
+                                document.getElementById("mContact").disabled = false;
+                                document.getElementById("mEmail").disabled = false;
+                                document.getElementById("registerButton").disabled = false;
+                            })
+
+                        // input pop up, set visibility to hidden
+                    }, 70000);
+                    // document.getElementById("accessKey").value = identityAccessKey;
+                },
+            }
+        );
+    </script>
+</body>
+
+</html>

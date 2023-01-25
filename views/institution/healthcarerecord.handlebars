@@ -1,0 +1,117 @@
+{{> _iNavbar}}
+{{> _flashmsg}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="stylesheet" href="/css/healthcare.css">
+    <style>
+      .img1{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 850px;
+    top: 100px;
+    bottom: 34.5px;
+    margin-top: -80px;
+
+    
+}
+
+.card {
+    
+    box-shadow: 2px 2px 5px #ccc;
+    height:fit-content;
+    
+    
+    
+
+    align-items: flex-start;
+    background-color: var(--yellow);
+    border-radius: 15px;
+    box-shadow: 0px 4px 22px #00000040;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-top: 32px;
+    min-height: 200px;
+    padding: 29px 69px;
+    width: 900px;
+}
+
+.card-body {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-left: -50px;
+    margin-top: -40px;
+    text-align: left;
+    margin-bottom: 10px;
+   
+}
+
+.title3{
+    font-weight: bold;
+    
+    
+}
+    </style>
+</head>
+<body>
+<div class="group-33618">
+    <div class="healthcare-records-container">
+        <div class="migrants-healthcare-records">MIGRANTS HEALTHCARE RECORDS</div>
+        
+
+    </div>
+
+    <div class="overlap-group1-group-33618">
+        <div class="search-for-migrant">Search For Migrant</div>
+        <div class="overlap-group-overlap-group1">
+            <form method="post" action="/healthcarerecord/search">
+                <input type="text" class="search-migrant-name-or-id rectangle-34624641" name="searchName"  placeholder="Search Migrant Name or ID..."  >
+                    <p class="test test3">{{count}} Results Found</p>
+                    <div class="test">
+                    <input type="submit" class="accept search valign-text-middle " value="Search">
+                    </div>
+                    
+                    
+            </form>
+            {{!-- <img class="ictwotone-search" src="ic-twotone-search.svg" alt="ic:twotone-search" /> --}}
+            
+           
+        </div>
+       
+    </div>
+
+
+
+
+<div class="card-container">
+
+
+    {{#each results}}
+        <br>
+        <div class="card card-block" style="box-shadow: 2px 2px 5px #ccc;">
+            
+                <div class="card-body">
+                    <div class="card-item title3 montserrat-bold-black-24px"> {{name}} </div>
+                      
+                      <a href="/healthcarerecord/healthcarerecord2/{{id}}"><img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" class="img1"></a> 
+                    <div class="card-item card-test gender-male-nationa valign-text-middle inter-normal-black-20px">
+                        
+                        {{role}}</br>{{address}} </br> {{contact}} </br> {{email}}
+                        
+                    </div>
+                </div>
+                
+            </div>
+        {{/each}}
+    
+</div>
+
+   
+</div>
+
+</body>
+</html>

@@ -1,0 +1,244 @@
+{{> _lNavbar}}
+{{> _flashmsg}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="stylesheet" href="/css/healthcare.css">
+    <!-- Load handlebars -->
+<script src="/path/to/handlebars/dist/handlebars.min.js"></script>
+<!-- Load just-handlebars-helpers -->
+<script src="/path/to/just-handlebars-helpers/dist/h.min.js"></script>
+
+<script type="text/javascript">
+  // Register just-handlebars-helpers with handlebars
+  H.registerHelpers(Handlebars);
+</script>
+    <style>
+        table{width:400px; length:100px; overflow: scroll; border-collapse: collapse;}
+        p{width:400px; length:100px; overflow: scroll;}
+       td {
+            border-bottom: 1px solid #dddddd;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: 600;
+        } 
+        .header_fixed {
+            height: 600px;
+            overflow: auto;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .header_fixed thead th {
+            position: sticky;
+            top: 0;
+            font-weight: 700;
+            font-size: 18px;
+            padding-top: 30px;
+        }
+        li {
+    display: inline;
+}
+
+        
+.card-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+        .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    margin: 10px;
+    box-shadow: 2px 2px 5px #ccc;
+    height:fit-content;
+    margin-top:20px;
+    
+    width: 900px;;
+}
+
+
+.card-item {
+    display:block;
+    margin-bottom: -10px;
+    margin-left: 80px;
+    text-align: center;
+    display: inline;
+}
+
+.card-container {
+    display: list-item;
+    flex-wrap: nowrap;
+    margin-left: 15px;
+   
+}
+
+.card-test{
+    margin:-1px;
+    margin-left: 550px;
+}
+
+.card-block{
+    display: block;
+    
+    
+}
+
+
+
+.card-body {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-left: 30px;
+    text-align: left;
+    margin-bottom: 10px;
+   
+}
+
+.hrdesign2{
+        
+       
+        
+        border-width:1px;
+        
+    
+}
+
+.title2{
+    color: #1e2f3c;
+    font-family: var(--font-family-inter);
+    font-size: 24px;
+    font-weight: 700px;
+    letter-spacing: -1px;
+    line-height: normal;
+    
+    width: 900px;
+    font-weight: bold;
+    
+}
+
+.title3{
+    color: #1e2f3c;
+    font-family: var(--font-family-inter);
+    font-size: 16px;
+    font-weight: 100px;
+    letter-spacing: -1px;
+    line-height: normal;
+    font-weight:500;
+    display: grid;
+    text-align: left;
+    width: 200px;
+    
+    
+}
+
+.title4{
+    color: #1e2f3c;
+    font-family: var(--font-family-inter);
+    font-size: 16px;
+    font-weight: 100px;
+    letter-spacing: -1px;
+    line-height: normal;
+    font-weight:500;
+    margin-left: 40px;
+    display:inline;
+   
+    
+}
+
+
+.hide-hr{
+    display: none;
+}
+
+.img1{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 800px;
+    top: 139px;
+    bottom: 34.5px;
+    margin-top: -80px;
+}
+
+.img2{
+    position: relative;
+    left: 60px;
+    top: 25.5px;
+   
+    margin-top: -80px;
+}
+
+
+.date1{
+    position: relative;
+    width: 200px;
+    top: 31px;
+    left: -100px;;
+    margin-top: 25px;
+    text-align-last: right !important;
+}
+
+
+
+    </style>
+</head>
+<body>
+     <h1 class="title" style="margin-left: 100px; width:500px;">MEDICATIONS</h1>
+
+<div class="frame-33605">
+    
+        
+        <div class="overlap-group10">
+            <div class="immunisation-records" style="margin-left: -160px; margin-top:-30px;">Medication Records</div>
+            <div>
+            <hr class="hrdesign"> </hr>
+            </div>
+      
+        </div>
+
+
+     <div class="card-container">
+    {{#each results}}
+        <br>
+        <div class="card card-block" style="box-shadow: 2px 2px 5px #ccc;">
+            <div class="card-header title2">{{med_institute}}</div>
+                <div class="card-body">
+                    <div class="card-item title3"> {{split med_provided}} </div>
+                    <div class="card-item card-test title3">
+                        {{!-- <a href="/healthcarerecord/editfamily/{{id}}" class="title4 "> Edit  </a> --}}
+                        {{!-- <a href="/healthcarerecord/deletefamily/{{id}}" class="title4 "> Delete </a> --}}
+                       
+                        <div class="date1">Date Provided: {{med_date}}</div>
+                        
+                    </div>
+                </div>
+                {{#if @last}}
+                {{else}}
+                <hr class="hrdesign2 hide-hr"></hr>
+                {{/if}}
+            </div>
+        {{/each}}
+    </div>
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+    </body>
+    </html>

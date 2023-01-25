@@ -1,0 +1,47 @@
+{{> _iNavbar}}
+{{> _flashmsg}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="stylesheet" href="/css/healthcare.css">
+    <style>
+        .image2{
+    height: 334px;
+    left: 107px;
+
+
+    position: absolute;
+    top: 110px;
+    width: 379px;
+
+}
+    </style>
+</head>
+<body>
+    <h1 class="title">FAMILY HISTORY</h1>
+
+    <div class="rectangle-34624619">
+        <div class="family-records">Family Records</div>
+        <hr class="test4"></hr>
+        
+        <div class="add-family-records inter-medium-black-24px">Add Family record</div>
+        
+       <a href="/healthcarerecord/addfamily/{{individual.id}}" class="add-a-new-record inter-light-black-20px">Add a new record now! </a>
+
+       <hr class="test6"></hr>
+
+       <img src="https://cdn-icons-png.flaticon.com/512/122/122892.png" class="image2"></img>
+        <div class="add-immunisation-records inter-medium-black-24px">Completed Family Record</div>
+        
+       <a href="/healthcarerecord/viewfamily/{{individual.id}}" class="add-a-new-record inter-light-black-20px">View your Family Medical History now! </a>
+        <hr class="test6"></hr>
+
+    </div>
+    
+
+
+
+    </body>
+</html>

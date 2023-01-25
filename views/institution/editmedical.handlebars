@@ -1,0 +1,57 @@
+{{> _iNavbar}}
+{{> _flashmsg}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/healthcare.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+     $(document).ready(function() {
+        $("#med_date").change(function() {
+            var selectedDate = new Date($(this).val());
+            var currentDate = new Date();
+            currentDate.setTime(currentDate.getTime() - 86400000);
+            if (selectedDate <= currentDate) {
+                alert("Invalid date! Please select a date after or equal to today's date.");
+                $(this).val("");
+            }
+        });
+    });
+    
+</script>
+</head>
+<body>
+    <h1 class="title">MEDICATIONS</h1>
+
+<div class="rectangle-34624619">
+    <div class="immunisation-records">Edit Medication Records</div>
+    <hr class="test4"></hr>
+    <div id="formContainer">
+         <form class="myForm" action="/healthcarerecord/medicalEdit/{{individual.id}}?_method=PUT" method="post">
+            <div class="test5">
+                <div class="form-group form-controltwo">
+                    <label class="labeltxt" for="med_institute">Healthcare Institute: </label>
+                    <input type="text" class="form-control someInput med_institute" value="{{individual.med_institute}}" id="med_institute" name="med_institute" required>
+                    
+                
+                </div>
+
+                <div class="form-group form-controltwo">
+                    <label class="labeltxt" for="med_date">Date of Visitation: </label>
+                    <input type="date" class="form-control someInput med_date" value="{{individual.med_date}}" id="med_date" name="med_date" required>
+                    
+                
+                </div>
+
+                <div class="form-group form-controltwo">
+                <label class="labeltxt" for="med_provided">Medicine provided: </label>
+                <input class="form-control someInput med_provided " id="med_provided" value="{{individual.med_provided}}" name="med_provided" required>
+            </div>
+            
+
+            <input class="positions" type="submit" value="Submit">
+        </div>
+    </form>
+    
+</div>
+</div>

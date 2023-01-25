@@ -1,0 +1,47 @@
+{{> _iNavbar}}
+{{> _flashmsg}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="stylesheet" href="/css/healthcare.css">
+    <style>
+        .image2{
+    height: 334px;
+    left: 85px;
+
+
+    position: absolute;
+    top: 100px;
+    width: 379px;
+
+}
+    </style>
+</head>
+<body>
+    <h1 class="title">MEDICATIONS</h1>
+
+    <div class="rectangle-34624619">
+        <div class="immunisation-records">Medication Records</div>
+        <hr class="test4"></hr>
+        
+        <div class="add-medical-records inter-medium-black-24px">Add Medication record</div>
+        
+       <a href="/healthcarerecord/addmedical/{{individual.id}}" class="add-a-new-record inter-light-black-20px">Add a new record now! </a>
+
+       <hr class="test6"></hr>
+
+       <img src="https://cdn-icons-png.flaticon.com/512/2621/2621990.png" class="image2"></img>
+        <div class="add-medical-records2 inter-medium-black-24px">Medication Recieved</div>
+        
+       <a href="/healthcarerecord/viewmedical/{{individual.id}}" class="add-a-new-record inter-light-black-20px">View your medication record now! </a>
+        <hr class="test6"></hr>
+
+    </div>
+    
+
+
+
+    </body>
+</html>

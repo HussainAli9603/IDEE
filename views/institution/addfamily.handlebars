@@ -1,0 +1,58 @@
+{{> _iNavbar}}
+{{> _flashmsg}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/healthcare.css">
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+     $(document).ready(function() {
+        $("#fam_date").change(function() {
+            var selectedDate = new Date($(this).val());
+            var currentDate = new Date();
+            currentDate.setTime(currentDate.getTime() - 86400000);
+            if (selectedDate <= currentDate) {
+                alert("Invalid date! Please select a date after or equal to today's date.");
+                $(this).val("");
+            }
+        });
+    });
+    
+</script>
+</head>
+<body>
+    <h1 class="title">FAMILY HEALTH RISKS</h1>
+
+<div class="rectangle-34624619">
+    <div class="immunisation-records">Add Family Records</div>
+    <hr class="test4"></hr>
+    <div id="formContainer">
+         <form class="myForm" action="/healthcarerecord/addfamily/{{individual.id}}" method="post">
+            <div class="test5">
+                <div class="form-group form-controltwo">
+                    <label class="labeltxt" for="fam_date">Date of Diagnosis: </label>
+                    <input type="date" class="form-control someInput fam_date" id="fam_date" name="fam_date" required>
+                    
+                
+                </div>
+
+                <div class="form-group form-controltwo">
+                <label class="labeltxt" for="fam_relationship">Family Relationship: </label>
+                <textarea class="form-control someInput fam_relationship " id="fam_relationship" name="fam_relationship" required></textarea>
+            </div>
+            <div class="form-group form-controltwo">
+                <label class="labeltxt" for="fam_healthrisk">Health Risk Found:</label>
+                <textarea class="form-control someInput fam_healthrisk " id="fam_healthrisk" name="fam_healthrisk" required></textarea>
+
+            </div>
+
+            <input class="positions" type="submit" value="Submit">
+        </div>
+    </form>
+    
+</div>
+</div>
+
+</body>
+</html>
+

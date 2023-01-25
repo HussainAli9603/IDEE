@@ -1,0 +1,45 @@
+{{> _iNavbar}}
+{{> _flashmsg}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/healthcare.css">
+    
+</head>
+<body>
+    <h1 class="title">ALLERGIES</h1>
+
+<div class="rectangle-34624619">
+    <div class="immunisation-records">Edit Allergy Records</div>
+    <hr class="test4"></hr>
+    <div id="formContainer">
+         <form class="myForm" action="/healthcarerecord/editAllergy/{{individual.id}}?_method=PUT" method="post">
+            <div class="test5">
+
+
+                <div class="form-group form-controltwo">
+                <label class="labeltxt" for="alg_to">Allergic to: </label>
+                <input class="form-control someInput alg_to" id="alg_to" name="alg_to" value="{{individual.alg_to}}"></input>
+            </div>
+
+                <div class="form-group form-controltwo">
+                    <label class="labeltxt" for="alg_date">Allergy Breakout Date: </label>
+                    <input type="date" class="form-control someInput alg_date" id="alg_date" value="{{individual.alg_date}}" name="alg_date" required>
+                </div>
+
+                
+            <div class="form-group form-controltwo">
+                <label class="labeltxt" for="alg_react">Allergy Reaction:</label>
+                <textarea class="form-control someInput alg_react " id="alg_react" name="alg_react">{{individual.alg_react}}</textarea>
+
+            </div>
+
+            <input class="positions" type="submit" value="Save">
+        </div>
+    </form>
+    
+</div>
+</div>
+
+</body>
+</html>

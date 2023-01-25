@@ -1,0 +1,61 @@
+{{> _iNavbar}}
+{{> _flashmsg}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/healthcare.css">
+    <style>
+            .title23{
+                left: 150px;
+                color: #1e2f3c;
+    font-family: var(--font-family-inter);
+    font-size: 32px;
+    font-weight: 700px;
+    letter-spacing: -1px;
+    line-height: normal;
+    margin-right: 6px;
+    
+    width: 400px;
+    font-weight: bold;
+    margin-left: 225px;
+            }
+    </style>
+    
+</head>
+<body>
+    <h1 class="title23">ALLERGIES</h1>
+
+<div class="rectangle-34624619">
+    <div class="immunisation-records">Add Allergy Records</div>
+    <hr class="test4"></hr>
+    <div id="formContainer">
+         <form class="myForm" action="/healthcarerecord/addallergy/{{individual.id}}" method="post">
+            <div class="test5">
+
+
+                <div class="form-group form-controltwo">
+                <label class="labeltxt" for="alg_to">Allergic to: </label>
+                <input class="form-control someInput alg_to" id="alg_to" name="alg_to" required></input>
+            </div>
+
+                <div class="form-group form-controltwo">
+                    <label class="labeltxt" for="alg_date">Allergy Breakout Date: </label>
+                    <input type="date" class="form-control someInput alg_date" id="alg_date" name="alg_date" required>
+                </div>
+
+                
+            <div class="form-group form-controltwo">
+                <label class="labeltxt" for="alg_react">Allergy Reaction:</label>
+                <textarea class="form-control someInput alg_react " id="alg_react" name="alg_react" required></textarea>
+
+            </div>
+
+            <input class="positions" type="submit" value="Submit">
+        </div>
+    </form>
+    
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<head>
+    <style>
+        {{!-- .container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        } --}}
+
+        * {
+            color: black;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .header_fixed {
+            height: 600px;
+            overflow: auto;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .header_fixed thead th {
+            position: sticky;
+            top: 0;
+            font-weight: 700;
+            font-size: 18px;
+            padding-top: 30px;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #dddddd;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        td img {
+            height: 88px;
+            width: 88px;
+            border: 5px solid #e6e7e8;
+            border-radius: 100%;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3)
+        }
+
+        ::-webkit-scrollbar-thumb {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3)
+        }
+
+        .accButton a {
+            color: white;
+        }
+
+        .rejButton a {
+            color: #020202;
+        }
+
+        .accButton {
+            background-color: #020202;
+            padding: 10px 32px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .rejButton {
+            background-color: #fff;
+            padding: 10px 32px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    {{> _aNavbar}}
+    {{> _flashmsg}}
+
+    <div class="container mt-5">
+        <h2 class="font-weight-bold">Pending Applications</h2>
+    </div>
+    <div class="container">
+        {{#if entity}}
+        <div class="header_fixed">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Applications</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>Registering as,</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each entity}}
+                    <tr>
+                        <td class="pr-0" style="width: 10%;"><img src="{{pic}}"></td>
+                        <td class="pl-0">{{name}}
+                            <br>
+                            <a href="{{website}}" style="color: #1890ff;">{{website}}</a>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td><i class="fa-solid fa-circle" style="{{checkRole role}}"></i>&nbsp; {{role}}</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <button class="accButton"><a href="/admin/accept/{{id}}">ACCEPT</a></button>
+                            <button class="rejButton"><a href="/admin/reject/{{id}}">REJECT</a></button>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        {{else}}
+            <h4>No Pending Applications</h4>
+        {{/if}}
+    </div>
+
+    <div class="container mt-5">
+        <h2 class="font-weight-bold">Verified Applications</h2>
+    </div>
+    <div class="container">
+        {{#if verified}}
+        <div class="header_fixed">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Applications</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>Registered as,</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each verified}}
+                    <tr>
+                        <td class="pr-0" style="width: 10%;"><img src="{{pic}}"></td>
+                        <td class="pl-0">{{name}}
+                            <br>
+                            <a href="{{website}}" style="color: #1890ff;">{{website}}</a>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td><i class="fa-solid fa-circle" style="{{checkRole role}}"></i>&nbsp; {{role}}</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <button class="accButton" style="{{checkActivated status}}; width: 80%;"><a href="/admin/deactivate/{{id}}">DEACTIVATE</a></button>
+                            <button class="rejButton" style="{{checkDeactivated status}}; width: 80%;"><a href="/admin/activate/{{id}}">ACTIVATE</a></button>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        {{else}}
+            <h4>No Applications Found</h4>
+        {{/if}}
+    </div>
+
+</body>

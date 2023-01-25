@@ -1,0 +1,63 @@
+{{> _iNavbar}}
+{{> _flashmsg}}
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        .title2{
+            
+            color: #1e2f3c;
+    font-family: var(--font-family-inter);
+    font-size: 32px;
+    font-weight: 700px;
+    letter-spacing: -1px;
+    line-height: normal;
+    margin-right: 6px;
+    
+    width: 400px;
+    font-weight: bold;
+    margin-left: 225px;
+        }
+
+      
+        .image2{
+    height: 324px;
+    left: 117px;
+
+
+    position: absolute;
+    top: 110px;
+    width: 359px;
+
+}
+    
+    </style>
+<head>
+
+    <link rel="stylesheet" href="/css/healthcare.css">
+</head>
+<body>
+    <h1 class="title2">ALLERGIES</h1>
+
+    <div class="rectangle-34624619">
+        <div class="family-records">Allergies Record</div>
+        <hr class="test4"></hr>
+
+        <div class="add-family-records inter-medium-black-24px">Add Allergy record</div>
+        
+       <a href="/healthcarerecord/addallergy/{{individual.id}}" class="add-a-new-record inter-light-black-20px">Add a new record now! </a>
+
+       <hr class="test6"></hr>
+
+       <img src="https://cdn-icons-png.flaticon.com/512/2854/2854973.png" class="image2"></img>
+        <div class="add-allergy-records inter-medium-black-24px">Completed Allergy Record</div>
+        
+       <a href="/healthcarerecord/viewallergy/{{individual.id}}" class="add-a-new-record inter-light-black-20px">View your Allergy History now! </a>
+        <hr class="test6"></hr>
+
+    </div>
+    
+
+
+
+    </body>
+</html>
